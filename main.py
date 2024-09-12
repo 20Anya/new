@@ -61,13 +61,11 @@ class Lecturer(Mentor):
 
     def __lt__(self, other):
         return self.average() < other.averge()
-    
+
     def __str__(self):
         return (f'Имя: {self.name}\n'
                 f'Фамилия: {self.surname}\n'
                 f'Средняя оценка за лекции: {self.average()}')
-
-
 
 class Reviewer(Mentor):
     def __init__(self, name, surname):
@@ -97,4 +95,63 @@ some_student.rate_st(some_lecturer, 'Python', 10)
 some_student.rate_st(some_lecturer, 'Python', 10)
 some_student.rate_st(some_lecturer, 'Python', 10)
 
-print(some_lecturer)
+student_1 = Student('koy', 'fit')
+student_2 = Student('filip', 'stoun')
+student_1.courses_in_progress += ['Python']
+student_1.courses_in_progress += ['Java']
+student_1.finished_courses += ['C+']
+student_2.courses_in_progress += ['Python']
+student_2.finished_courses += ['Java']
+student_list = [student_1 , student_2]
+
+lecturer_1 = Lecturer('play', 'boy')
+lecturer_2 = Lecturer('guy', 'women')
+rewiewer_1 = Reviewer('do', 'work')
+rewiewer_2 = Reviewer('play', 'man')
+lecturer_1.courses_attached += ['Python']
+lecturer_1.courses_attached += ['Java']
+rewiewer_1.courses_attached += ['Python']
+rewiewer_1.courses_attached += ['Java']
+lecturer_2.courses_attached += ['Python']
+rewiewer_2.courses_attached += ['Java']
+lecture_list = [lecturer_1 , lecturer_2]
+
+rewiewer_1.rate_rw(student_1, 'Python', 10)
+rewiewer_1.rate_rw(student_1, 'Java', 9)
+rewiewer_2.rate_rw(student_1, 'Java', 9)
+rewiewer_1.rate_rw(student_2, 'Python', 9)
+rewiewer_1.rate_rw(student_2, 'Python', 9)
+rewiewer_1.rate_rw(student_2, 'Python', 9)
+rewiewer_1.rate_rw(student_2, 'Python', 10)
+
+student_1.rate_st(lecturer_1, 'Java', 10)
+student_2.rate_st(lecturer_1, 'Java', 8)
+student_1.rate_st(lecturer_1, 'Python', 8)
+student_2.rate_st(lecturer_1, 'Python', 8)
+student_1.rate_st(lecturer_2, 'Python', 9)
+student_2.rate_st(lecturer_2, 'Python', 8)
+
+def grades_student(student_list, course):
+    for student in student_list:
+        for grades in student.grades:
+            grades_list = student.grades.get(course)
+            all_grades = sum(grades_list)
+            len_grades = len(grades_list)
+            return all_grades / len_grades
+
+def grades_lecturer(lecture_list, course):
+    for lecture in lecture_list:
+        for grades in lecture.lecture_grades:
+            grades_list1 = lecture.lecture_grades.get(course)
+            all_grades1 = sum(grades_list1)
+            len_grades1 = len(grades_list1)
+            return all_grades1 / len_grades1
+
+print (student_1)
+print (lecturer_1)
+print (student_1.average_value() < student_2.average_value())
+print (student_1.average_value() == student_2.average_value())
+print (lecturer_1.average() == lecturer_2.average())
+print (grades_lecturer(lecture_list, 'Python'))
+print (grades_student(student_list, 'Java'))
+
